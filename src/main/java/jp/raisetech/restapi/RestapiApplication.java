@@ -1,4 +1,4 @@
-package jp.raisetech.rstapi;
+package jp.raisetech.restapi;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
