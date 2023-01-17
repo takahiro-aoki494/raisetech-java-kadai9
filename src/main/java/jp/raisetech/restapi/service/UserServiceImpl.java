@@ -25,10 +25,6 @@ public class UserServiceImpl implements UserService {
     public Users findById(int id) {
         Optional<Users> user = this.userMapper.findById(id);
 
-        if (user.isPresent()) {
-            return user.get();
-        } else {
-            throw new ResourceNotFoundException("resource not found");
-        }
+        return user.orElseThrow(() -> new ResourceNotFoundException("resource not found"));
     }
 }
