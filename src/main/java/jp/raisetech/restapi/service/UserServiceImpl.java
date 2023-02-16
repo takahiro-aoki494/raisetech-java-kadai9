@@ -3,18 +3,16 @@ package jp.raisetech.restapi.service;
 import jp.raisetech.restapi.entity.Users;
 import jp.raisetech.restapi.exception.ResourceNotFoundException;
 import jp.raisetech.restapi.mapper.UserMapper;
+import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.Optional;
 
 @Service
+@RequiredArgsConstructor
 public class UserServiceImpl implements UserService {
     private final UserMapper userMapper;
-
-    public UserServiceImpl(UserMapper userMapper) {
-        this.userMapper = userMapper;
-    }
 
     @Override
     public List<Users> findAll() {
