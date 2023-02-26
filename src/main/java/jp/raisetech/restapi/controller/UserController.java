@@ -70,4 +70,13 @@ public class UserController {
 
         return ResponseEntity.ok(Map.of("message", "user successfully updated"));
     }
+
+    @DeleteMapping("/users/{id}")
+    public ResponseEntity<Map<String, String>> deleteUser(@PathVariable("id") int id) {
+
+        // 削除処理
+        userService.deleteUser(id);
+
+        return ResponseEntity.ok(Map.of("message", "user successfully deleted"));
+    }
 }

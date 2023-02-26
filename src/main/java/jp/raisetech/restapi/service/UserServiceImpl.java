@@ -57,4 +57,14 @@ public class UserServiceImpl implements UserService {
             userMapper.updateUserPin(id, form.getPin());
         }
     }
+
+    @Override
+    public void deleteUser(int id) {
+
+        //指定されたidが存在しない場合ResourceNotFoundExceptionを投げる
+        Optional<Users> user = userMapper.findById(id);
+        user.orElseThrow(() -> new ResourceNotFoundException("resource not found"));
+
+        userMapper.deleteUser(id);
+    }
 }

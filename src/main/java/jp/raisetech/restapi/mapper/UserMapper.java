@@ -26,4 +26,8 @@ public interface UserMapper {
 
     @Update("UPDATE names SET pin=#{pin}   WHERE id = #{id}")
     void updateUserPin(int id, int pin);
+
+    @Delete("DELETE FROM names WHERE id = #{id}")
+    void deleteUser(int id);
+
 }
