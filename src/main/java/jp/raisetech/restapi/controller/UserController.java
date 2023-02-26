@@ -1,6 +1,7 @@
 package jp.raisetech.restapi.controller;
 
 import jp.raisetech.restapi.entity.CreateForm;
+import jp.raisetech.restapi.entity.UpdateForm;
 import jp.raisetech.restapi.entity.Users;
 import jp.raisetech.restapi.service.UserService;
 import lombok.RequiredArgsConstructor;
@@ -47,11 +48,26 @@ public class UserController {
         }
 
         // 登録処理
-        Users user = userService.create(form);
+        Users user = userService.createUser(form);
         URI url = builder.path("/users/" + user.getId()) // id部分は実際に登録された際に発⾏したidを設定する
                 .build().toUri();
 
         return ResponseEntity.created(url).body(Map.of("message", "user successfully created"));
     }
 
+
+    @PatchMapping("/users/{id}")
+    public ResponseEntity<Map<String, String>> updateUser(@PathVariable("id") int id,
+                                                          @RequestParam(defaultValue = "null", required = false) String userName,
+                                                          @RequestParam(defaultValue = "0000/1/1", required = false) String birthdate,
+                                                          @RequestParam(defaultValue = "0", required = false) Integer pin) {
+
+        //受け取ったパラメータ使ってformを作成
+        UpdateForm form = new UpdateForm(userName, birthdate, pin);
+
+        //更新処理
+        userService.updateUser(id, form);
+
+        return ResponseEntity.ok(Map.of("message", "user successfully updated"));
+    }
 }

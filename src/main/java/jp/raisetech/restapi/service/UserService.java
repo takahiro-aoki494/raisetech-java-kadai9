@@ -1,6 +1,7 @@
 package jp.raisetech.restapi.service;
 
 import jp.raisetech.restapi.entity.CreateForm;
+import jp.raisetech.restapi.entity.UpdateForm;
 import jp.raisetech.restapi.entity.Users;
 
 import java.util.List;
@@ -11,5 +12,7 @@ public interface UserService {
 
     Users findById(int id) throws Exception;
 
-    Users create(CreateForm form);
+    Users createUser(CreateForm form);
+
+    void updateUser(int id, UpdateForm form);
 }
