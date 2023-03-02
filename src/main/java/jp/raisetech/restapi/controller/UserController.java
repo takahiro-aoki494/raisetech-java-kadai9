@@ -6,14 +6,11 @@ import jp.raisetech.restapi.entity.Users;
 import jp.raisetech.restapi.service.UserService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
-import org.springframework.validation.BindingResult;
-import org.springframework.validation.FieldError;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.util.UriComponentsBuilder;
 
 import java.net.URI;
-import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -25,8 +22,7 @@ public class UserController {
 
     @GetMapping("/users")
     public List<Users> getUsers() {
-        List<Users> users = userService.findAll();
-        return users;
+        return userService.findAll();
     }
 
     @GetMapping("/users/{id}")
@@ -35,17 +31,8 @@ public class UserController {
     }
 
     @PostMapping("/users")
-    public ResponseEntity<Map<String, String>> createUser(@RequestBody @Validated CreateForm form, BindingResult result,
+    public ResponseEntity<Map<String, String>> createUser(@RequestBody @Validated CreateForm form,
                                                           UriComponentsBuilder builder) {
-
-        //バリデーションでエラーがでたら、エラーメッセージをレスポンスする
-        if (result.hasErrors()) {
-            Map<String, String> errors = new HashMap<>();
-            for (FieldError error : result.getFieldErrors()) {
-                errors.put(error.getField(), error.getDefaultMessage());
-            }
-            return ResponseEntity.status(400).body(errors);
-        }
 
         // 登録処理
         Users user = userService.createUser(form);

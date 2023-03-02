@@ -53,7 +53,7 @@ public class UserServiceImpl implements UserService {
             userMapper.updateUserBirthdate(id, form.getBirthdate());
         }
 
-        if (!(form.equals(form.getPin() == 0))) {
+        if (!(Objects.equals(form.getPin(), 0))) {
             userMapper.updateUserPin(id, form.getPin());
         }
     }
