@@ -15,16 +15,16 @@ public interface UserMapper {
     Optional<Users> findById(int id);
 
     @Options(useGeneratedKeys = true, keyProperty = "id", keyColumn = "id")
-    @Insert("INSERT INTO names (name,birthdate,pin) values (#{name}, #{birthdate}, #{pin})")
+    @Insert("INSERT INTO names (name, birthdate, pin) VALUES (#{name}, #{birthdate}, #{pin})")
     void insertUser(Users user);
 
-    @Update("UPDATE names SET name=#{userName}  WHERE id = #{id}")
+    @Update("UPDATE names SET name=#{userName} WHERE id = #{id}")
     void updateUserName(int id, String userName);
 
-    @Update("UPDATE names SET birthdate=#{birthdate}  WHERE id = #{id}")
+    @Update("UPDATE names SET birthdate=#{birthdate} WHERE id = #{id}")
     void updateUserBirthdate(int id, String birthdate);
 
-    @Update("UPDATE names SET pin=#{pin}   WHERE id = #{id}")
+    @Update("UPDATE names SET pin=#{pin} WHERE id = #{id}")
     void updateUserPin(int id, int pin);
 
     @Delete("DELETE FROM names WHERE id = #{id}")
