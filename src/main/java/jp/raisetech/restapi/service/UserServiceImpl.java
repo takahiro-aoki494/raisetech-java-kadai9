@@ -44,16 +44,14 @@ public class UserServiceImpl implements UserService {
         Optional<Users> user = userMapper.findById(id);
         user.orElseThrow(() -> new ResourceNotFoundException("resource not found"));
 
-        //formの各要素がデフォルトの値でない場合は更新処理を行う
-        if (!(Objects.equals(form.getUserName(), null))) {
+        //formの各要素がnullでない場合は更新処理を行う
+        if (Objects.nonNull(form.getUserName())) {
             userMapper.updateUserName(id, form.getUserName());
         }
-
-        if (!(Objects.equals(form.getBirthdate(), "0000/01/01"))) {
+        if (Objects.nonNull(form.getBirthdate())) {
             userMapper.updateUserBirthdate(id, form.getBirthdate());
         }
-
-        if (!(Objects.equals(form.getPin(), 1))) {
+        if (Objects.nonNull(form.getPin())) {
             userMapper.updateUserPin(id, form.getPin());
         }
     }
