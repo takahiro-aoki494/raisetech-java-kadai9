@@ -45,15 +45,10 @@ public class UserController {
 
     @PatchMapping("/users/{id}")
     public ResponseEntity<Map<String, String>> updateUser(@PathVariable("id") int id,
-                                                          @RequestParam(defaultValue = "null", required = false) String userName,
-                                                          @RequestParam(defaultValue = "0000/1/1", required = false) String birthdate,
-                                                          @RequestParam(defaultValue = "0", required = false) Integer pin) {
-
-        //受け取ったパラメータ使ってformを作成
-        UpdateForm form = new UpdateForm(userName, birthdate, pin);
+                                                          @Validated @RequestBody UpdateForm updateForm) {
 
         //更新処理
-        userService.updateUser(id, form);
+        userService.updateUser(id, updateForm);
 
         return ResponseEntity.ok(Map.of("message", "user successfully updated"));
     }
